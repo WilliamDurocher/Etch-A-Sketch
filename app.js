@@ -1,6 +1,14 @@
 
+  const gridContainer = document.getElementById('grid-container');
+  const gridItems = [];
 
-const gridContainer = document.getElementById('grid-container');
+
+function run(){
+  makeGrid(16,16);
+  addSketchEffects(gridItems);
+
+}
+
 
 function makeGrid(rows, cols) {
     gridContainer.style.setProperty('--grid-rows', rows);
@@ -8,8 +16,20 @@ function makeGrid(rows, cols) {
     for (c = 0; c < (rows * cols); c++) {
       let cell = document.createElement("div");
       gridContainer.appendChild(cell).className = "grid-item";
+      gridItems.push(cell);
     };
   };
 
 
-makeGrid(16,16)
+function addSketchEffects(gridItems){
+  gridItems.forEach((item) => {
+    item.addEventListener('mouseover', () => {
+      item.style.backgroundColor = "green";
+    })
+  
+  });
+}
+
+
+
+run();
