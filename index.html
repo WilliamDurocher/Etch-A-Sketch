@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,15 +8,28 @@
     <title>Etch-A-Sketch</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <div class="main-container">
         <h1>Etch-a-Sketch!</h1>
-        <button type="button">Erase all</button>
-        <div id="grid-container">
-
+        <div class="btn-container">
+            <button class="btn" id="btn-info" type="button">How to play</button>
+            <button class="btn" id="btn-clear" type="button">Clear</button>
+            <button class="btn" id="btn-change"type="button">Change Size</button>
         </div>
+        <div id="grid-container"/>
+            
+        
     </div>
-   
+    <div id="modal-container">
+
+<div id="info-modal">
+    <span id="close">&times;</span>
+    <p>Your Contents</p>    
+</div>
+</div>
+
 </body>
 <script src="app.js"></script>
+
 </html>
