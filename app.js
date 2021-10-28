@@ -9,8 +9,29 @@ const clearBtn = document.getElementById('btn-clear');
 const modalContainer = document.getElementById('modal-container');
 const modalClose = document.getElementById('close');
 
-//TODO Refactor
-gridContainer.addEventListener("mousedown", function() {
+function run(size) {
+
+  //default grid size
+  if (size === undefined) {
+    size = 16;
+  }
+  makeGrid(size, size);
+  addSketchEffects(gridItems);
+
+}
+
+/* Core functions and listeners */
+
+function addSketchEffects(gridItems) {
+  gridItems.forEach(item => {
+    item.addEventListener('mouseover', () => {
+      item.style.backgroundColor = "#f8c7cc";
+    })
+
+  });
+}
+
+gridContainer.addEventListener("mousedown", function () {
   window.addEventListener("mousemove", drag);
   window.addEventListener("mouseup", lift);
   function drag() {
@@ -20,7 +41,7 @@ gridContainer.addEventListener("mousedown", function() {
         item.style.backgroundColor = "";
       })
     });
-}
+  }
   function lift() {
     //when the person lifts mouse
     addSketchEffects(gridItems);
@@ -29,16 +50,6 @@ gridContainer.addEventListener("mousedown", function() {
     window.removeEventListener("mouseup", this)
   }
 });
-
-function run(size) {
-
-  if (size === undefined) {
-    size = 16;
-  }
-  makeGrid(size, size);
-  addSketchEffects(gridItems);
-
-}
 
 saveBtn.addEventListener('click', openModal);
 changeBtn.addEventListener('click', changeGrid);
@@ -78,8 +89,9 @@ function changeGrid(msg) {
   } else {
     size = prompt('Choose a number from 1 to 100:');
   }
-  if (size > 100 || size == '') {
+  if (size > 100 || size == '' || size % 1 != 0) {
 
+    //call function until cancel or valid number
     changeGrid('Please try a different number:');
   } else if (size) {
 
@@ -92,28 +104,23 @@ function changeGrid(msg) {
 }
 
 
-function addSketchEffects(gridItems) {
-  gridItems.forEach(item => {
-    item.addEventListener('mouseover', () => {
-      item.style.backgroundColor = "#f8c7cc";
-    })
-
-  });
-}
 
 
+/* Modal functions */
 function openModal() {
   modalContainer.style.display = 'block';
-  }
-
-  function closeModal() {
-    modalContainer.style.display = 'none';
-    }
-
-  window.onclick = function(event) {
-    if (event.target == modalContainer) {
-      closeModal();
-    }
 }
 
+function closeModal() {
+  modalContainer.style.display = 'none';
+}
+
+window.onclick = function (event) {
+  if (event.target == modalContainer) {
+    closeModal();
+  }
+}
+
+
+//initialize app
 run();
